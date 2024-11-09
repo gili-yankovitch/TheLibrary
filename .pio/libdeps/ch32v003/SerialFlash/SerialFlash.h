@@ -47,14 +47,14 @@ public:
 	static void readID(uint8_t *buf);
 	static void readSerialNumber(uint8_t *buf);
 	static void read(uint32_t addr, void *buf, uint32_t len);
-	static void _read(uint32_t addr, void *buf, uint32_t len);
+	// static void _read(uint32_t addr, void *buf, uint32_t len);
 	static bool ready();
 	static void wait();
 	static void write(uint32_t addr, const void *buf, uint32_t len);
-	static void _write(uint32_t addr, const void *buf, uint32_t len);
+	// static void _write(uint32_t addr, const void *buf, uint32_t len);
 	static void eraseAll();
 	static void eraseBlock(uint32_t addr);
-	static void eraseSector(uint32_t addr);
+	// static void eraseSector(uint32_t addr);
 
 	static SerialFlashFile open(const char *filename);
 	static bool create(const char *filename, uint32_t length, uint32_t align = 0);

@@ -469,6 +469,4 @@ const uint8_t FONT_Z[ROWS][COLS] = {
 	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 };
 
-#define NUM_LETTERS 12
-
 #endif // __FONT_H__

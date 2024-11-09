@@ -86,13 +86,15 @@ void SerialFlashChip::wait(void)
 	//Serial.println();
 }
 
+#if 0
 void SerialFlashChip::read(uint32_t addr, void *buf, uint32_t len)
 {
 	// Use first sector as scratch, so writes are seamless
 	return _read(addr + SECTOR_SIZE, buf, len);
 }
+#endif
 
-void SerialFlashChip::_read(uint32_t addr, void *buf, uint32_t len)
+void SerialFlashChip::read(uint32_t addr, void *buf, uint32_t len)
 {
 	uint8_t *p = (uint8_t *)buf;
 	uint8_t b, f, status, cmd;
@@ -192,6 +194,7 @@ void SerialFlashChip::_read(uint32_t addr, void *buf, uint32_t len)
 	SPIPORT.endTransaction();
 }
 
+#if 0
 #define ALIGN(addr, align) ((addr) & ~((align)-1))
 #define ALIGN_UP(addr, align) (ALIGN((addr) + (align), (align)))
 #define SECTOR_ALIGN(addr) ALIGN(addr, SECTOR_SIZE)
@@ -281,9 +284,9 @@ void SerialFlashChip::write(uint32_t addr, const void *buf, uint32_t len)
 	// Don't leave residue
 	eraseSector(0);
 }
+#endif
 
-
-void SerialFlashChip::_write(uint32_t addr, const void *buf, uint32_t len)
+void SerialFlashChip::write(uint32_t addr, const void *buf, uint32_t len)
 {
 	const uint8_t *p = (const uint8_t *)buf;
 	uint32_t max, pagelen;
@@ -393,6 +396,7 @@ void SerialFlashChip::eraseBlock(uint32_t addr)
 }
 
 
+#if 0
 void SerialFlashChip::eraseSector(uint32_t addr)
 {
 	if (busy)
@@ -413,6 +417,7 @@ void SerialFlashChip::eraseSector(uint32_t addr)
 	busy = 2;
 	wait();
 }
+#endif
 
 bool SerialFlashChip::ready()
 {
@@ -575,6 +580,7 @@ void SerialFlashChip::readSerialNumber(uint8_t *buf) //needs room for 8 bytes
 //	Serial.printf("Serial Number: %02X %02X %02X %02X %02X %02X %02X %02X\n", buf[0], buf[1], buf[2], buf[3], buf[4], buf[5], buf[6], buf[7]);
 }
 
+
 uint32_t SerialFlashChip::capacity(const uint8_t *id)
 {
 	uint32_t n = 1048576; // unknown chips, default to 1 MByte
@@ -603,7 +609,6 @@ uint32_t SerialFlashChip::blockSize()
 	// everything else seems to have 64K sectors
 	return 65536;
 }
-
 
 
 
